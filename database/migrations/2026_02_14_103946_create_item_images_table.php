@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('item_images', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
+            $table->string('img_url');
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profiles');
+        Schema::dropIfExists('item_images');
     }
 };

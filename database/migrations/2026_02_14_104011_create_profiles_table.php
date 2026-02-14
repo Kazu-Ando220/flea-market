@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conditions', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('post_code');
+            $table->string('address');
+            $table->string('building');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conditions');
+        Schema::dropIfExists('profiles');
     }
 };
