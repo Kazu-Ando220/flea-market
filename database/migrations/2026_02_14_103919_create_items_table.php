@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('condition_id')->constrained('conditions')->onDelete('cascade');
             $table->string('name');
-            $table->string('brand');
+            $table->string('brand')->nullable();
             $table->text('description');
             $table->integer('price');
             $table->string('is_sold')->default('');

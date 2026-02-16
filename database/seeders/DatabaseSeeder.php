@@ -12,6 +12,10 @@ class DatabaseSeeder extends Seeder
             ConditionsTableSeeder::class,
             CategoriesTableSeeder::class,
             UsersTableSeeder::class,
+            ItemsTableSeeder::class,
+            ItemImagesTableSeeder::class,
+            CommentsTableSeeder::class,
+            ProfilesTableSeeder::class,
         ]);
     }
 }
