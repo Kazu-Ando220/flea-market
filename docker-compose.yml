@@ -17,8 +17,13 @@ services:
 
   mysql:
     image: mysql:8.0
+    ports:
+      - "${FORWARD_DB_PORT:-3306}:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: flea_market
     volumes:
-      - ./docker/mysql:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
