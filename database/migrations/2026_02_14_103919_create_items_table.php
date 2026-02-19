@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('brand')->nullable();
             $table->text('description');
             $table->integer('price');
-            $table->string('is_sold')->default('');
+            $table->boolean('is_sold')->default(false);
             $table->timestamps();
         });
     }

@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Route;
 
 // 商品一覧（未認証でも閲覧可能）
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
-Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show');
 
 // 認証が必要な機能
 Route::middleware('auth')->group(function () {
     // 商品関連（出品）
-    Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
-    Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
+    Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
+    Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
 
     // マイページ関連
     Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage.index');
