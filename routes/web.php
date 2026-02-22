@@ -15,6 +15,12 @@ Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show
 
 // 認証が必要な機能
 Route::middleware('auth')->group(function () {
+    // いいね機能
+    Route::post('item/{item_id}/like', [LikeController::class, 'store'])->name('like.store');
+
+    // コメント投稿
+    Route::post('item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
+
     // 商品関連（出品）
     Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
     Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
@@ -31,8 +37,4 @@ Route::middleware('auth')->group(function () {
     // 配送先関連
     Route::get('/purchase/address/{item_id}', [AddressController::class, 'edit'])->name('address.edit');
     Route::patch('/purchase/address/{item_id}', [AddressController::class, 'update'])->name('address.update');
-
-    // コメント・いいね
-    Route::post('item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
-    Route::post('item/{item_id}/like', [LikeController::class, 'store'])->name('like.store');
 });

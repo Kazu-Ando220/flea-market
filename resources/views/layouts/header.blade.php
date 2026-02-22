@@ -6,11 +6,10 @@
             </a>
         </div>
 
-        {{-- ログイン・登録画面以外で表示 --}}
         @if (!Route::is('login', 'register'))
             <div class="search-box">
                 <form method="GET" action="{{ route('items.index') }}">
-                    <input type="text" name="keyword" placeholder="なにをお探しですか？">
+                    <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
                 </form>
             </div>
 
@@ -18,7 +17,6 @@
                 @auth
                     <li><a href="#" class="nav-link-item">ログアウト</a></li>
                 @else
-                    {{-- 商品一覧と詳細の時だけログイン表示 --}}
                     @if (Route::is('items.index', 'items.show'))
                         <li><a href="{{ route('login') }}" class="nav-link-item">ログイン</a></li>
                     @endif

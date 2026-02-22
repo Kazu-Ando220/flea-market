@@ -12,11 +12,16 @@ class ItemController extends Controller
         // $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::with('item_images')->get();
+        $tab = $request->query('tab', 'recommend');
+        $keyword = $request->query('keyword');
+        $items = Item::query()
+            ->tab($tab)
+            ->keyword($keyword)
+            ->get();
 
-        return view ('items.index', compact('items'));
+        return view('items.index', compact('tab', 'keyword', 'items'));
     }
 
     public function create()
@@ -29,8 +34,19 @@ class ItemController extends Controller
 
     }
 
-    public function show()
+    public function show($item_id)
     {
+        $item = Item::with([
+            'user',
+            'category',
+            'condition',
+            'item_images',
+            'comments.user',
+            'likes',
+        ])->findOrFail($item_id);
 
+        $isLiked = $item->isLikedByCurrentUser();
+
+        return view('items.show',compact('item', 'isLiked'));
     }
 }

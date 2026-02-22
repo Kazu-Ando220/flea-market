@@ -11,8 +11,5 @@ class ItemImage extends Model
 
     protected $fillable = ['item_id', 'img_url'];
 
-    public function Item()
-    {
-        return $this->belongsTo(Item::class);
-    }
+    public function Item() { return $this->belongsTo(Item::class); }
 }

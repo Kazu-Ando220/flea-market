@@ -31,10 +31,12 @@
     border: none;
     border-radius: 5px;
     font-size: 14px;
+    transition: box-shadow 0.3s;
 }
 
 .search-box input:focus {
     outline: 2px solid #FF4D4D;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.3);
 }
 
 .nav-links {
@@ -51,10 +53,11 @@
     text-decoration: none;
     font-size: 14px;
     white-space: nowrap;
+    transition: opacity 0.3s;
 }
 
 .nav-link-item:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .btn-sell {
@@ -66,10 +69,13 @@
     font-weight: bold;
     font-size: 14px;
     white-space: nowrap;
+    transition: all 0.3s;
 }
 
 .btn-sell:hover {
     background-color: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* タブエリア */
@@ -91,6 +97,7 @@
     text-decoration: none;
     color: #888;
     font-size: 16px;
+    transition: color 0.3s;
 }
 
 .tab-item.is-active {
@@ -111,17 +118,19 @@
 
 .item-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 220px);
+    grid-template-columns: repeat(4, 1fr);
     gap: 25px;
     justify-content: center;
 }
 
 .item-card {
     width: 220px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .item-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .item-card a {
@@ -140,6 +149,11 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.item-card:hover .img-box img {
+    transform: scale(1.05);
 }
 
 .item-name {
@@ -157,4 +171,294 @@
     padding: 5px 15px;
     font-size: 14px;
     font-weight: bold;
+}
+
+.empty-message {
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+    padding: 100px 20px;
+}
+
+/* 商品詳細ページ */
+.item-detail {
+    display: flex;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.item-image {
+    width: 50%;
+}
+
+.item-image img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.item-info {
+    width: 50%;
+}
+
+.item-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.item-brand {
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.item-price {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.item-stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.stat-item img {
+    width: 25px;
+    height: 25px;
+}
+
+.btn-purchase {
+    width: 100%;
+    display: block;
+    background-color: #FF4D4D;
+    color: #FFF;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-purchase:disabled {
+    background-color: #CCC;
+    cursor: not-allowed;
+}
+
+.detail-section {
+    margin-bottom: 30px;
+}
+
+.detail-section h2 {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #CCC;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.info-row {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-weight: bold;
+    min-width: 100px;
+}
+
+.category-tag {
+    background-color: #EEE;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+}
+
+.comment-section h2 {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #CCC;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.comment-item {
+    margin-bottom: 20px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #CCC;
+    border-radius: 50%;
+}
+
+.comment-body {
+    background-color: #F5F5F5;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.comment-form {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #FAFAFA;
+    border-radius: 5px;
+}
+
+.comment-form h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.comment-form textarea:disabled {
+    background-color: #F5F5F5;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.btn-comment {
+    display: block;
+    width: 100%;
+    background-color: #FF4D4D;
+    color: #FFF;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.btn-comment:disabled {
+    background-color: #CCC;
+    cursor: not-allowed;
+}
+
+.login-prompt {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-prompt a {
+    color: #FF4D4D;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.error-message {
+    color: #FF4D4D;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* いいねボタン */
+.like-form {
+    display: inline;
+}
+
+.like-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.like-button img,
+.guest-icon {
+    width: 25px;
+    height: 25px;
+}
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.modal-content p {
+    margin-bottom: 25px;
+    color: #666;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.btn-modal-login,
+.btn-modal-register {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-modal-login {
+    background-color: #FF4D4D;
+    color: #FFF;
+}
+
+.btn-modal-register {
+    background-color: #FFF;
+    color: #FF4D4D;
+    border: 2px solid #FF4D4D;
 }
