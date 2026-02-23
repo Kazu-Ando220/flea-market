@@ -15,7 +15,12 @@
 
             <ul class="nav-links">
                 @auth
-                    <li><a href="#" class="nav-link-item">ログアウト</a></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"class="nav-link-item nav-link-btn-reset">ログアウト</button>
+                        </form>
+                    </li>
                 @else
                     @if (Route::is('items.index', 'items.show'))
                         <li><a href="{{ route('login') }}" class="nav-link-item">ログイン</a></li>
