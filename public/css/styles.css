@@ -1,4 +1,6 @@
-/* ヘッダー */
+/* ===============================
+   ヘッダー
+================================= */
 .header {
     background-color: #000;
     padding: 20px 0;
@@ -22,21 +24,44 @@
 .search-box {
     flex-grow: 1;
     margin: 0 30px;
+    display: flex;
+    align-items: center;
 }
 
-.search-box input {
+.search-form {
     width: 100%;
-    max-width: 500px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: box-shadow 0.3s;
+    max-width: 1000px;
+    position: relative;
 }
 
-.search-box input:focus {
+.search-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 40px 0 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
     outline: 2px solid #FF4D4D;
-    box-shadow: 0 0 8px rgba(255, 77, 77, 0.3);
+}
+
+.search-clear {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.search-clear:hover {
+    color: #FF4D4D;
 }
 
 .nav-links {
@@ -87,7 +112,9 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* メッセージ表示 */
+/* ===============================
+   共通メッセージ
+================================= */
 .error {
     background-color: #FEE2E2;
     padding: 12px 16px;
@@ -98,20 +125,36 @@
 
 .success {
     background-color: #D1FAE5;
-    padding: 12px 16px;
+    color: #065F46;
+    padding: 12px 16px 12px 45px;
     border-radius: 4px;
     margin-bottom: 16px;
     border-left: 4px solid #059669;
+    position: relative;
+    font-weight: bold;
 }
 
-/* タブエリア */
+.success::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-70%) rotate(45deg);
+    width: 7px;
+    height: 14px;
+    border-right: 3px solid #059669;
+    border-bottom: 3px solid #059669;
+}
+
+/* ===============================
+   タブエリア
+================================= */
 .tab-area {
-    margin: 30px auto 0;
-    padding: 0;
+    width: 100%;
     border-bottom: 2px solid #CCC;
 }
 
-.tab-area .tab-inner {
+.tab-inner {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
@@ -126,27 +169,38 @@
     transition: color 0.3s;
 }
 
+.tab-item:hover,
 .tab-item.is-active {
     color: #FF4D4D;
     font-weight: bold;
 }
 
-.tab-item:hover {
-    color: #FF4D4D;
-}
-
-/* 商品一覧 */
+/* ===============================
+   共通レイアウト
+================================= */
 .content-wrapper {
     max-width: 1200px;
     margin: 0 auto;
     padding: 30px 20px;
 }
 
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+    padding: 100px 20px;
+}
+
+/* ===============================
+   商品一覧
+================================= */
 .item-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 25px;
     justify-content: center;
+    margin-top: 30px;
 }
 
 .item-card {
@@ -182,7 +236,7 @@
     transform: scale(1.05);
 }
 
-.item-name {
+.item-card .item-name {
     margin-top: 10px;
     color: #333;
     font-size: 14px;
@@ -199,14 +253,9 @@
     font-weight: bold;
 }
 
-.empty-message {
-    text-align: center;
-    color: #999;
-    font-size: 16px;
-    padding: 100px 20px;
-}
-
-/* 商品詳細ページ */
+/* ===============================
+   商品詳細
+================================= */
 .item-detail {
     display: flex;
     gap: 50px;
@@ -226,7 +275,7 @@
     width: 50%;
 }
 
-.item-name {
+.item-info .item-name {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -255,7 +304,9 @@
     gap: 5px;
 }
 
-.stat-item img {
+.stat-item img,
+.like-button img,
+.guest-icon {
     width: 25px;
     height: 25px;
 }
@@ -280,11 +331,15 @@
     cursor: not-allowed;
 }
 
+/* ===============================
+   詳細セクション
+================================= */
 .detail-section {
     margin-bottom: 30px;
 }
 
-.detail-section h2 {
+.detail-section h2,
+.comment-section h2 {
     font-size: 18px;
     font-weight: bold;
     border-bottom: 1px solid #CCC;
@@ -310,14 +365,9 @@
     font-size: 14px;
 }
 
-.comment-section h2 {
-    font-size: 18px;
-    font-weight: bold;
-    border-bottom: 1px solid #CCC;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-}
-
+/* ===============================
+   コメント
+================================= */
 .comment-item {
     margin-bottom: 20px;
 }
@@ -329,7 +379,7 @@
     margin-bottom: 10px;
 }
 
-.user-avatar {
+.comment-section .user-avatar {
     width: 40px;
     height: 40px;
     background-color: #CCC;
@@ -347,12 +397,6 @@
     padding: 20px;
     background-color: #FAFAFA;
     border-radius: 5px;
-}
-
-.comment-form h3 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 15px;
 }
 
 .comment-form textarea {
@@ -385,7 +429,6 @@
 
 .btn-comment:disabled {
     background-color: #CCC;
-    cursor: not-allowed;
 }
 
 .login-prompt {
@@ -406,25 +449,9 @@
     margin-top: 5px;
 }
 
-/* いいねボタン */
-.like-form {
-    display: inline;
-}
-
-.like-button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-.like-button img,
-.guest-icon {
-    width: 25px;
-    height: 25px;
-}
-
-/* モーダル */
+/* ===============================
+   モーダル
+================================= */
 .modal {
     display: none;
     position: fixed;
@@ -441,30 +468,20 @@
     margin: 15% auto;
     padding: 30px;
     border-radius: 10px;
-    width: 400px;
+    width: 450px;
     text-align: center;
 }
 
-.modal-content h2 {
-    margin-bottom: 15px;
-    font-size: 20px;
-}
-
 .modal-content p {
-    margin-bottom: 25px;
-    color: #666;
+    margin: 20px 0;
+    color: #333;
 }
 
 .close {
-    color: #AAA;
     float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-}
-
-.close:hover {
-    color: #000;
 }
 
 .btn-modal-login,
@@ -489,7 +506,9 @@
     border: 2px solid #FF4D4D;
 }
 
-/* --- 認証・プロフィール共通 --- */
+/* ===============================
+   認証
+================================= */
 .auth-wrapper {
     max-width: 500px;
     margin: 60px auto;
@@ -522,7 +541,6 @@
     font-size: 16px;
 }
 
-/* 共通ボタン（.btn-purchaseをベースに汎用化） */
 .btn-submit {
     width: 100%;
     background-color: #FF4D4D;
@@ -534,11 +552,6 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
-    transition: opacity 0.3s;
-}
-
-.btn-submit:hover {
-    opacity: 0.8;
 }
 
 .auth-link {
@@ -548,10 +561,32 @@
     text-decoration: none;
 }
 
-.user-avatar {
+/* ===============================
+   マイページ（プロフィール一覧）
+================================= */
+.profile-avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.profile-avatar-section .form-group {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.avatar-wrapper {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+.avatar-wrapper .user-avatar {
     width: 100%;
     height: 100%;
-    background-color: #ccc;
+    background-color: #CCC;
     border-radius: 50%;
 }
 
@@ -560,23 +595,6 @@
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-}
-
-.btn-avatar:hover {
-    opacity: 0.8;
-}
-
-.profile-avatar-section {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-.avatar-wrapper {
-    width: 100px;
-    height: 100px;
-    flex-shrink: 0;
 }
 
 .btn-avatar {
@@ -588,4 +606,38 @@
     border: 2px solid #FF4D4D;
     cursor: pointer;
     font-weight: bold;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 200px;
+}
+
+.profile-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.profile-right {
+    flex-shrink: 0;
+}
+
+.btn-edit {
+    display: inline-block;
+    background-color: #FFF;
+    color: #FF4D4D;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #FF4D4D;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
 }

@@ -8,8 +8,12 @@
 
         @if (!Route::is('login', 'register'))
             <div class="search-box">
-                <form method="GET" action="{{ route('items.index') }}">
-                    <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
+                <form method="GET" action="{{ route('items.index') }}" class="search-form">
+                    <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}"class="search-input">
+
+                    @if(request('keyword'))
+                        <a href="{{ route('items.index') }}" class="search-clear">×</a>
+                    @endif
                 </form>
             </div>
 

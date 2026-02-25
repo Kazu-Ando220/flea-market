@@ -24,6 +24,7 @@ class Item extends Model
         'is_sold' => 'boolean',
     ];
 
+    // リレーション
     public function category() { return $this->belongsTo(Category::class); }
     public function condition() { return $this->belongsTo(Condition::class); }
     public function user() { return $this->belongsTo(User::class); }
@@ -36,6 +37,7 @@ class Item extends Model
 
     public function likedUsers() { return $this->belongsToMany(User::class, 'likes'); }
 
+    // スコープ
     public function scopeTab($query, $tab)
     {
         if ($tab === 'mylist') {
@@ -47,7 +49,7 @@ class Item extends Model
                 ->whereHas('likes', function ($q) {
                     $q->where('user_id', auth()->id());
                 })
-                ->with('item_images');;
+                ->with('item_images');
         }
 
         if (auth()->check()) {

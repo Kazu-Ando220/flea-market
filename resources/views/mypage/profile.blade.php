@@ -9,10 +9,9 @@
         @method('PATCH')
 
         <div class="profile-avatar-section">
-
             <div class="avatar-wrapper">
                 @if(optional($user->profile)->avatar)
-                    <img src="{{ asset('storage/' . $user->profile->avatar) }}" class="avatar-image">
+                    <img src="{{ asset('storage/' . $user->profile->avatar) }}" class="avatar-image" alt="プロフィール画像">
                 @else
                     <div class="user-avatar"></div>
                 @endif
@@ -25,7 +24,6 @@
                 </label>
                 <span id="fileName"></span>
             </div>
-
         </div>
 
         <div class="form-group">
