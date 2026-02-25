@@ -16,11 +16,11 @@
     @if($items->isEmpty())
         <p class="empty-message">
             @if($keyword)
-                「{{ $keyword }}」に一致する商品がありません
+                「{{ $keyword }}」に一致する商品はありません
             @elseif($tab === 'mylist')
-                いいねした商品がありません
+                いいねした商品はありません
             @else
-                商品がありません
+                商品はありません
             @endif
         </p>
     @else
@@ -36,6 +36,7 @@
                                 <span class="sold-tag">Sold</span>
                             @endif
                         </div>
+
                         <p class="item-name">{{ $item->name }}</p>
                     </a>
                 </div>

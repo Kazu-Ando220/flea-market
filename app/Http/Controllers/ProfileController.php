@@ -4,9 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    public function index(Request $request)
+    {
+        $user = Auth::user()->load('profile');
+        $page = $request->query('page', 'sell');
+        $items = $user->itemsForMyPage($page);
+
+        return view('mypage.index', compact('user', 'page', 'items'));
+    }
+
     public function edit()
     {
         $user = Auth::user()->load('profile');
@@ -16,18 +26,16 @@ class ProfileController extends Controller
 
     public function update(ProfileRequest $request)
     {
-        $user = $request->user();
-        $user->update(['name' => $request->name,]);
-        $profile = $user->profile ?? $user->profile()->create([]);
+        $user = Auth::user();
+        $user->update(['name' => $request->name]);
+        $profile = $user->profile ?? $user->profile()->create();
 
         if ($request->hasFile('avatar')) {
             $profile->avatar = $request->file('avatar')
                 ->store('avatars', 'public');
         }
+        $profile->fill($request->only(['post_code', 'address', 'building']))->save();
 
-        $profile->update($request->only(['post_code', 'address', 'building']));
-
-        return redirect()->route('items.index')
-            ->with('success', 'プロフィールを更新しました。');
+        return redirect()->route('items.index')->with('success', 'プロフィールを更新しました。');
     }
 }

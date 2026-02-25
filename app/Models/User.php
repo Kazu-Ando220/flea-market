@@ -37,4 +37,13 @@ class User extends Authenticatable
     public function orders() { return $this->hasMany(Order::class); }
 
     public function likedItems() { return $this->belongsToMany(Item::class, 'likes'); }
+
+    public function itemsForMypage($page)
+    {
+        if ($page === 'buy') {
+            return $this->orders()->with('item.item_images')->get()->pluck('item');
+        }
+
+        return $this->items()->with('item_images')->get();
+    }
 }
