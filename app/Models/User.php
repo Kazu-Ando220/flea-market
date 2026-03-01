@@ -46,4 +46,16 @@ class User extends Authenticatable
 
         return $this->items()->with('item_images')->get();
     }
+
+    public function updateProfileAddress(array $data)
+    {
+        return $this->profile()->updateOrCreate(
+            ['user_id' => $this->id],
+            [
+                'post_code' => $data['post_code'],
+                'address'   => $data['address'],
+                'building'  => $data['building'],
+            ]
+        );
+    }
 }

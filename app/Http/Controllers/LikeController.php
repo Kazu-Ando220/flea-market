@@ -11,6 +11,6 @@ class LikeController extends Controller
         $item = Item::findOrFail($item_id);
         $item->toggleLike(auth()->id());
 
-        return redirect()->route('items.show', $item_id);
+        return redirect()->route('items.show', $item->id);
     }
 }

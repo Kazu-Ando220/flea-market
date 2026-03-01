@@ -23,6 +23,7 @@
             {{-- いいね・コメント数 --}}
             <div class="item-stats">
                 <div class="stat-item">
+
                     @auth
                         <form method="POST" action="{{ route('like.store', $item->id) }}" class="like-form">
                             @csrf
@@ -37,6 +38,7 @@
                     @else
                         <img src="{{ asset('images/icon-heart-default.png') }}" alt="いいね" class="guest-icon">
                     @endauth
+
                     <span>{{ $item->likes->count() }}</span>
                 </div>
 
@@ -79,20 +81,22 @@
             </div>
 
             {{-- コメント一覧 --}}
-            <div class="comment-section">
+            <div class="comment-section" id="comment-section">
                 <h2>コメント（{{ $item->comments->count() }}）</h2>
 
-                @foreach($item->comments as $comment)
+                @forelse($item->comments as $comment)
                     <div class="comment-item">
                         <div class="user-info">
                             <div class="user-avatar"></div>
                             <span>{{ $comment->user->name }}</span>
                         </div>
                         <div class="comment-body">
-                            {{ $comment->content }}
+                            {!! nl2br(e($comment->content)) !!}
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <p class="empty-message">コメントはまだありません。</p>
+                @endforelse
 
                 {{-- コメント投稿フォーム --}}
                 <div class="comment-form">
@@ -114,8 +118,10 @@
                         <p class="login-prompt">コメントするには<a href="javascript:void(0)" onclick="showLoginModal()">ログイン</a>が必要です</p>
                         <button class="btn-comment" disabled>コメントを送信する</button>
                     @endauth
+
                 </div>
             </div>
+
         </div>
     </div>
 </div>

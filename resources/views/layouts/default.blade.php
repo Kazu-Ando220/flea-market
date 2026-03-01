@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title')</title>
+    <title>@yield('title', 'COACHTECHフリマ')</title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
@@ -11,17 +11,25 @@
 <body>
     @include('layouts.header')
 
-    @foreach($errors->all() as $error)
-        <p class="error">{{ $error }}</p>
-    @endforeach
+    <div class="page-body">
+        {{-- @if ($errors->any())
+            <div class="error">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif --}}
 
-    @if (Session::has('success'))
-        <div class="success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
+        @if (Session::has('success'))
+            <div class="success">
+                {{ Session::get('success') }}
+            </div>
+        @endif
 
-    @yield('content')
+        @yield('content')
+    </div>
 
     {{-- ログインモーダル --}}
     @guest

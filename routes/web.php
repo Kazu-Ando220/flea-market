@@ -11,15 +11,15 @@ use Illuminate\Support\Facades\Route;
 
 // 商品一覧（未認証でも閲覧可能）
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
-Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show');
+Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
 
 // 認証が必要な機能
 Route::middleware('auth')->group(function () {
     // いいね機能
-    Route::post('item/{item_id}/like', [LikeController::class, 'store'])->name('like.store');
+    Route::post('items/{item}/like', [LikeController::class, 'store'])->name('like.store');
 
     // コメント投稿
-    Route::post('item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('items/{item}/comment', [CommentController::class, 'store'])->name('comment.store');
 
     // 商品関連（出品）
     Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
@@ -31,10 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // 購入関連
-    Route::get('/purchase/{item_id}', [PurchaseController::class, 'create'])->name('purchase.create');
-    Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.store');
+    Route::get('/purchase/{item}', [PurchaseController::class, 'create'])->name('purchase.create');
+    Route::post('/purchase/{item}', [PurchaseController::class, 'store'])->name('purchase.store');
 
     // 配送先関連
-    Route::get('/purchase/address/{item_id}', [AddressController::class, 'edit'])->name('address.edit');
-    Route::patch('/purchase/address/{item_id}', [AddressController::class, 'update'])->name('address.update');
+    Route::get('/purchase/address/{item}', [AddressController::class, 'edit'])->name('address.edit');
+    Route::patch('/purchase/address/{item}', [AddressController::class, 'update'])->name('address.update');
 });

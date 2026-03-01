@@ -27,23 +27,40 @@
         </div>
 
         <div class="form-group">
-            <label class="form-label">ユーザー名</label>
-                <input type="text" name="name" class="form-input" value="{{ old('name', $user->name) }}">
+            <label class="form-label">ユーザー名
+                <input type="text" name="name" class="form-input @error('name') is-invalid @enderror"
+                value="{{ old('name', $user->name) }}">
+            </label>
+            @error('name')
+                <p class="error-message">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="form-group">
-            <label class="form-label">郵便番号</label>
-                <input type="text" name="post_code" class="form-input" value="{{ old('post_code', $user->profile?->post_code) }}">
+            <label class="form-label">郵便番号
+                <input type="text" name="post_code" class="form-input @error('post_code') is-invalid @enderror"
+                value="{{ old('post_code', $user->profile?->post_code) }}" placeholder="123-4567">
+            </label>
+            @error('post_code')
+                <p class="error-message">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="form-group">
-            <label class="form-label">住所</label>
-                <input type="text" name="address" class="form-input" value="{{ old('address', $user->profile?->address) }}">
+            <label class="form-label">住所
+                <input type="text" name="address" class="form-input @error('address') is-invalid @enderror"
+                value="{{ old('address', $user->profile?->address) }}">
+            </label>
+            @error('address')
+                <p class="error-message">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="form-group">
-            <label class="form-label">建物名</label>
-                <input type="text" name="building" class="form-input" value="{{ old('building', $user->profile?->building) }}">
+            <label class="form-label">建物名
+                <input type="text" name="building" class="form-input"
+                value="{{ old('building', $user->profile?->building) }}">
+            </label>
         </div>
 
         <input type="submit" class="btn-submit" value="更新する">

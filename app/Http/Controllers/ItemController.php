@@ -12,21 +12,12 @@ class ItemController extends Controller
         $tab = $request->query('tab', 'recommend');
         $keyword = $request->query('keyword');
         $items = Item::query()
+            ->with(['item_images'])
             ->tab($tab)
             ->keyword($keyword)
             ->get();
 
         return view('items.index', compact('tab', 'keyword', 'items'));
-    }
-
-    public function create()
-    {
-
-    }
-
-    public function store()
-    {
-
     }
 
     public function show($item_id)
@@ -42,6 +33,6 @@ class ItemController extends Controller
 
         $isLiked = $item->isLikedByCurrentUser();
 
-        return view('items.show',compact('item', 'isLiked'));
+        return view('items.show', compact('item', 'isLiked'));
     }
 }

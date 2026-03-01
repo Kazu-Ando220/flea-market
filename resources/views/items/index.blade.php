@@ -31,6 +31,8 @@
                         <div class="img-box">
                             @if ($item->item_images->count())
                                 <img src="{{ asset('storage/' . $item->item_images->first()->img_url) }}" alt="{{ $item->name }}">
+                            @else
+                                <img src="{{ asset('images/no-image.png') }}" alt="No Image">
                             @endif
                             @if($item->is_sold)
                                 <span class="sold-tag">Sold</span>
