@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,15 +49,14 @@ class Item extends Model
             return $query
                 ->whereHas('likes', function ($q) {
                     $q->where('user_id', auth()->id());
-                })
-                ->with('item_images');
+                });
         }
 
         if (auth()->check()) {
             $query->where('user_id', '!=', auth()->id());
         }
 
-        return $query->with('item_images');
+        return $query;
     }
 
     public function scopeKeyword($query, $keyword)
@@ -68,7 +68,6 @@ class Item extends Model
         return $query;
     }
 
-    // いいね切替
     public function toggleLike($user_id)
     {
         $like = $this->likes()->where('user_id', $user_id)->first();
@@ -93,5 +92,31 @@ class Item extends Model
             return false;
         }
         return $this->isLikedBy(auth()->id());
+    }
+
+    public function purchase(array $data, int $userId): void
+    {
+        // 二重購入防止
+        if ($this->is_sold) {
+            abort(403);
+        }
+
+        $user = User::with('profile')->findOrFail($userId);
+
+        // 住所未登録チェック
+        if (!$user->profile) {
+            abort(403, '配送先が登録されていません。');
+        }
+
+        // 注文履歴の作成：購入時点の配送先住所をスナップショットとして保存
+        $this->order()->create([
+            'user_id'        => $userId,
+            'payment_method' => $data['payment_method'],
+            'post_code'      => $user->profile->post_code,
+            'address'        => $user->profile->address,
+            'building'       => $user->profile->building,
+        ]);
+
+        $this->update(['is_sold' => true]);
     }
 }
