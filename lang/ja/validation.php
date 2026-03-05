@@ -14,6 +14,10 @@ return [
         'name' => 'お名前',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'img_url' => '商品画像',
+        'category_id' => 'カテゴリー',
+        'condition_id' => '商品の状態',
+        'description' => '商品の説明',
+        'price' => '販売価格',
     ],
-
 ];

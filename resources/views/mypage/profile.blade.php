@@ -13,74 +13,60 @@
                 @if(optional($user->profile)->avatar)
                     <img src="{{ asset('storage/' . $user->profile->avatar) }}" class="avatar-image" alt="プロフィール画像">
                 @else
-                    <div class="user-avatar"></div>
+                    <img src="{{ asset('images/no_image.png') }}" class="avatar-image" alt="デフォルトプロフィール画像">
                 @endif
             </div>
 
             <div class="form-group">
-                <label for="avatarInput" class="btn-avatar">
+                <label class="btn-avatar">
                     画像を選択する
-                    <input type="file" name="avatar" id="avatarInput" hidden>
+                    <input type="file" name="avatar" class="js-avatar-input" hidden>
                 </label>
-                <span id="fileName"></span>
+                <span class="js-file-name"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="form-label">ユーザー名
-                <input type="text" name="name" class="form-input @error('name') is-invalid @enderror"
+            <label class="form-label">ユーザー名</label>
+            <input type="text" name="name"
+                class="form-input @error('name') is-invalid @enderror"
                 value="{{ old('name', $user->name) }}">
-            </label>
             @error('name')
                 <p class="error-message">{{ $message }}</p>
             @enderror
         </div>
 
         <div class="form-group">
-            <label class="form-label">郵便番号
-                <input type="text" name="post_code" class="form-input @error('post_code') is-invalid @enderror"
-                value="{{ old('post_code', $user->profile?->post_code) }}" placeholder="123-4567">
-            </label>
+            <label class="form-label">郵便番号</label>
+            <input type="text" name="post_code"
+                class="form-input @error('post_code') is-invalid @enderror"
+                value="{{ old('post_code', $user->profile?->post_code) }}"
+                placeholder="123-4567">
             @error('post_code')
                 <p class="error-message">{{ $message }}</p>
             @enderror
         </div>
 
         <div class="form-group">
-            <label class="form-label">住所
-                <input type="text" name="address" class="form-input @error('address') is-invalid @enderror"
+            <label class="form-label">住所</label>
+            <input type="text" name="address"
+                class="form-input @error('address') is-invalid @enderror"
                 value="{{ old('address', $user->profile?->address) }}">
-            </label>
             @error('address')
                 <p class="error-message">{{ $message }}</p>
             @enderror
         </div>
 
         <div class="form-group">
-            <label class="form-label">建物名
-                <input type="text" name="building" class="form-input"
+            <label class="form-label">建物名</label>
+            <input type="text" name="building" class="form-input"
                 value="{{ old('building', $user->profile?->building) }}">
-            </label>
         </div>
 
         <input type="submit" class="btn-submit" value="更新する">
     </form>
 </div>
 
-{{-- 画像選択時にファイル名表示 --}}
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const input = document.getElementById('avatarInput');
-
-    if (input) {
-        input.addEventListener('change', function () {
-            const file = input.files[0];
-            if (file) {
-                document.getElementById('fileName').textContent = file.name;
-            }
-        });
-    }
-});
-</script>
+@vite(['resources/js/profile.js'])
 
 @endsection

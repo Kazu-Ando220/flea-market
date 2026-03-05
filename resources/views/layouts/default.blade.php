@@ -12,16 +12,6 @@
     @include('layouts.header')
 
     <div class="page-body">
-        {{-- @if ($errors->any())
-            <div class="error">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif --}}
-
         @if (Session::has('success'))
             <div class="success">
                 {{ Session::get('success') }}
@@ -43,22 +33,7 @@
             </div>
         </div>
 
-        <script>
-        function showLoginModal() {
-            document.getElementById('loginModal').style.display = 'block';
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('loginModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
-        </script>
+        @vite(['resources/js/modal.js'])
     @endguest
 </body>
 

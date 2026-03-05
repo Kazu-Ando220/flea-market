@@ -3,9 +3,10 @@
 
 <div class="content-wrapper">
     <div class="item-detail">
+
         {{-- 左側: 商品画像 --}}
         <div class="item-image">
-            @if ($item->item_images->count())
+            @if($item->item_images->count())
                 <img src="{{ asset('storage/' . $item->item_images->first()->img_url) }}" alt="{{ $item->name }}">
             @endif
         </div>
@@ -23,7 +24,6 @@
             {{-- いいね・コメント数 --}}
             <div class="item-stats">
                 <div class="stat-item">
-
                     @auth
                         <form method="POST" action="{{ route('like.store', $item->id) }}" class="like-form">
                             @csrf
@@ -38,7 +38,6 @@
                     @else
                         <img src="{{ asset('images/icon-heart-default.png') }}" alt="いいね" class="guest-icon">
                     @endauth
-
                     <span>{{ $item->likes->count() }}</span>
                 </div>
 
@@ -58,7 +57,7 @@
                     <a href="{{ route('purchase.create', $item->id) }}" class="btn-purchase">購入手続きへ</a>
                 @endif
             @else
-                <button class="btn-purchase" onclick="showLoginModal()">購入手続きへ</button>
+                <button class="btn-purchase js-login-trigger">購入手続きへ</button>
             @endauth
 
             {{-- 商品説明 --}}
@@ -81,7 +80,7 @@
             </div>
 
             {{-- コメント一覧 --}}
-            <div class="comment-section" id="comment-section">
+            <div class="comment-section">
                 <h2>コメント（{{ $item->comments->count() }}）</h2>
 
                 @forelse($item->comments as $comment)
@@ -105,20 +104,23 @@
                     @auth
                         <form method="POST" action="{{ route('comment.store', $item->id) }}">
                             @csrf
-                            <textarea name="content" rows="5" placeholder="コメントを入力" maxlength="255">{{ old('content') }}</textarea>
-
+                            <textarea name="content"
+                                class="@error('content') is-invalid @enderror"
+                                rows="5"
+                                placeholder="コメントを入力"
+                                maxlength="255">{{ old('content') }}</textarea>
                             @error('content')
                                 <p class="error-message">{{ $message }}</p>
                             @enderror
-
                             <button type="submit" class="btn-comment">コメントを送信する</button>
                         </form>
                     @else
                         <textarea placeholder="コメントを入力" disabled></textarea>
-                        <p class="login-prompt">コメントするには<a href="javascript:void(0)" onclick="showLoginModal()">ログイン</a>が必要です</p>
+                        <p class="login-prompt">
+                            コメントするには<a href="javascript:void(0)" class="js-login-trigger">ログイン</a>が必要です
+                        </p>
                         <button class="btn-comment" disabled>コメントを送信する</button>
                     @endauth
-
                 </div>
             </div>
 

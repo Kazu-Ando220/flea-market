@@ -41,6 +41,10 @@ class Item extends Model
     // スコープ
     public function scopeTab($query, $tab)
     {
+        if (auth()->check()) {
+            $query->where('user_id', '!=', auth()->id());
+        }
+
         if ($tab === 'mylist') {
             if (!auth()->check()) {
                 return $query->where('id', 0);
@@ -50,10 +54,6 @@ class Item extends Model
                 ->whereHas('likes', function ($q) {
                     $q->where('user_id', auth()->id());
                 });
-        }
-
-        if (auth()->check()) {
-            $query->where('user_id', '!=', auth()->id());
         }
 
         return $query;
@@ -118,5 +118,25 @@ class Item extends Model
         ]);
 
         $this->update(['is_sold' => true]);
+    }
+
+    public static function createItem(array $data, int $userId)
+    {
+        $path = $data['img_url']->store('items', 'public');
+
+        $item = self::create([
+            'user_id'      => $userId,
+            'category_id'  => $data['category_id'],
+            'condition_id' => $data['condition_id'],
+            'name'         => $data['name'],
+            'brand'        => $data['brand'] ?? null,
+            'description'  => $data['description'],
+            'price'        => $data['price'],
+            'is_sold'      => false,
+        ]);
+
+        $item->item_images()->create(['img_url' => $path]);
+
+        return $item;
     }
 }

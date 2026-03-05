@@ -6,11 +6,11 @@ use App\Models\Item;
 
 class LikeController extends Controller
 {
-    public function store($item_id)
+    public function store(Item $item)
     {
-        $item = Item::findOrFail($item_id);
         $item->toggleLike(auth()->id());
 
-        return redirect()->route('items.show', $item->id);
+        return redirect()
+            ->route('items.show', $item->id);
     }
 }
