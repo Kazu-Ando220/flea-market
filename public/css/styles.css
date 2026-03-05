@@ -425,6 +425,11 @@
     resize: vertical;
 }
 
+.comment-form textarea.is-invalid {
+    border: 1px solid #DC2626;
+    background-color: #FEE2E2;
+}
+
 .comment-form textarea:disabled {
     background-color: #F5F5F5;
     color: #999;
@@ -558,7 +563,7 @@
 .address-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
 }
 
 .form-group {
@@ -637,20 +642,15 @@
     width: 100px;
     height: 100px;
     flex-shrink: 0;
-}
-
-.avatar-wrapper .user-avatar {
-    width: 100%;
-    height: 100%;
-    background-color: #CCC;
     border-radius: 50%;
+    overflow: hidden;
 }
 
 .avatar-image {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
     object-fit: cover;
+    display: block;
 }
 
 .btn-avatar {
@@ -847,4 +847,127 @@
 
 .summary-table th {
     font-weight: normal;
+}
+
+/* ===============================
+   出品画面
+================================= */
+.sell-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.auth-wrapper {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.sell-section {
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+
+.sell-section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #CCC;
+    color: #888;
+}
+
+.sell-image-area {
+    width: 250px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    border: 2px dashed #CCC;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+
+.sell-image-area:hover {
+    border-color: #F44;
+}
+
+.sell-image-label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.preview-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sell-image-placeholder {
+    display: inline-block;
+    background-color: #FFF;
+    color: #F44;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #F44;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.sell-image-input {
+    display: none;
+}
+
+.sell-image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.sell-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.btn-sell {
+    margin-top: 60px;
+}
+
+/* ===============================
+   カテゴリ選択
+================================= */
+.category-display-area {
+    margin-bottom: 10px;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid #F44;
+    color: #F44;
+    border-radius: 20px;
+    font-size: 12px;
+    background-color: #FFF;
+}
+
+.category-select-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.is-hidden {
+    display: none;
 }

@@ -9,21 +9,24 @@ use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
-    public function edit($item_id)
+    public function edit(Item $item)
     {
         $user = Auth::user();
-        $item = Item::findOrFail($item_id);
+
+        if (request()->has('payment_method')) {
+            session(['payment_method' => request('payment_method')]);
+        }
 
         return view('purchase.address', compact('user', 'item'));
     }
 
-    public function update(AddressRequest $request, $item_id)
+    public function update(AddressRequest $request, Item $item)
     {
         $user = Auth::user();
         $user->updateProfileAddress($request->validated());
 
         return redirect()
-            ->route('purchase.create', $item_id)
+            ->route('purchase.create', $item->id)
             ->with('success', '配送先住所を変更しました。');
     }
 }

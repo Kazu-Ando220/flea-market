@@ -58,4 +58,22 @@ class User extends Authenticatable
             ]
         );
     }
+
+    public function syncProfile(array $data): void
+    {
+        $profile = $this->profile ?? new \App\Models\Profile(['user_id' => $this->id]);
+
+        if (isset($data['avatar']) && $data['avatar'] instanceof \Illuminate\Http\UploadedFile) {
+            $profile->avatar = $data['avatar']->store('avatars', 'public');
+        }
+
+        $profile->fill([
+            'post_code' => $data['post_code'],
+            'address'   => $data['address'],
+            'building'  => $data['building'] ?? null,
+        ]);
+
+        // 最後にまとめて保存
+        $profile->save();
+    }
 }

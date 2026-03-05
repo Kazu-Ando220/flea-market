@@ -17,3 +17,6 @@ RUN docker-php-ext-install pdo_mysql mbstring gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
+
+# storageディレクトリの権限設定
+RUN mkdir -p /var/www/storage && chmod -R 777 /var/www/storage

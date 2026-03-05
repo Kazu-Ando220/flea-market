@@ -22,8 +22,13 @@ Route::middleware('auth')->group(function () {
     Route::post('items/{item}/comment', [CommentController::class, 'store'])->name('comment.store');
 
     // 商品関連（出品）
-    Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
-    Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
+    Route::get('/sell', [ItemController::class, 'create'])
+        ->name('items.create')
+        ->can('create', App\Models\Item::class);;
+
+    Route::post('/sell', [ItemController::class, 'store'])
+        ->name('items.store')
+        ->can('create', App\Models\Item::class);
 
     // マイページ関連
     Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage.index');
@@ -31,8 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // 購入関連
-    Route::get('/purchase/{item}', [PurchaseController::class, 'create'])->name('purchase.create');
-    Route::post('/purchase/{item}', [PurchaseController::class, 'store'])->name('purchase.store');
+    Route::get('/purchase/{item}', [PurchaseController::class, 'create'])
+        ->name('purchase.create')
+        ->can('create', [App\Models\Order::class, 'item']);
+
+    Route::post('/purchase/{item}', [PurchaseController::class, 'store'])
+        ->name('purchase.store')
+        ->can('create', [App\Models\Order::class, 'item']);
 
     // 配送先関連
     Route::get('/purchase/address/{item}', [AddressController::class, 'edit'])->name('address.edit');

@@ -4,6 +4,8 @@ services:
     volumes:
       - .:/var/www
     working_dir: /var/www
+    entrypoint: >
+      sh -c "chmod -R 777 /var/www/storage && php-fpm"
 
   nginx:
     image: nginx:latest
