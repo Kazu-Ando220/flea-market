@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const reader = new FileReader();
             reader.onload = function (e) {
-                previewContainer.innerHTML = ''; 
+                previewContainer.innerHTML = '';
                 const img = document.createElement('img');
                 img.src = e.target.result;
                 img.className = 'sell-image-preview';

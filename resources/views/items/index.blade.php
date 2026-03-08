@@ -3,10 +3,10 @@
 
 <div class="tab-area">
     <div class="tab-inner">
-        <a href="{{ route('items.index', ['tab' => 'recommend']) }}" class="tab-item {{ $tab === 'recommend' ? 'is-active' : '' }}">
+        <a href="{{ route('items.index', ['tab' => 'recommend', 'keyword' => request('keyword')]) }}" class="tab-item {{ $tab === 'recommend' ? 'is-active' : '' }}">
             おすすめ
         </a>
-        <a href="{{ route('items.index', ['tab' => 'mylist']) }}" class="tab-item {{ $tab === 'mylist' ? 'is-active' : '' }}">
+        <a href="{{ route('items.index', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}" class="tab-item {{ $tab === 'mylist' ? 'is-active' : '' }}">
             マイリスト
         </a>
     </div>

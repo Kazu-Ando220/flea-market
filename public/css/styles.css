@@ -1,20 +1,25 @@
 .page-body {
-    padding-top: 20px;
+    padding-top: 100px;
 }
 
 /* ===============================
-   ヘッダー
+ヘッダー
 ================================= */
 .header {
-    background-color: #000;
-    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 80px;
+    background-color: #000;
+    z-index: 1000;
 }
 
 .header-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
@@ -26,15 +31,16 @@
 }
 
 .search-box {
-    flex-grow: 1;
+    flex: 1;
     margin: 0 30px;
     display: flex;
     align-items: center;
+    min-width: 200px;
 }
 
 .search-form {
     width: 100%;
-    max-width: 1000px;
+    max-width: 600px;
     position: relative;
 }
 
@@ -117,7 +123,7 @@
 }
 
 /* ===============================
-   共通メッセージ
+共通メッセージ
 ================================= */
 .error {
     background-color: #FEE2E2;
@@ -156,7 +162,7 @@
 }
 
 /* ===============================
-   タブエリア
+タブエリア
 ================================= */
 .tab-area {
     width: 100%;
@@ -185,7 +191,7 @@
 }
 
 /* ===============================
-   共通レイアウト
+共通レイアウト
 ================================= */
 .content-wrapper {
     max-width: 1200px;
@@ -202,7 +208,7 @@
 }
 
 /* ===============================
-   商品一覧
+商品一覧
 ================================= */
 .item-grid {
     display: grid;
@@ -263,7 +269,7 @@
 }
 
 /* ===============================
-   商品詳細
+商品詳細
 ================================= */
 .item-detail {
     display: flex;
@@ -347,7 +353,7 @@
 }
 
 /* ===============================
-   詳細セクション
+詳細セクション
 ================================= */
 .detail-section {
     margin-bottom: 30px;
@@ -381,7 +387,7 @@
 }
 
 /* ===============================
-   コメント
+コメント
 ================================= */
 .comment-item {
     margin-bottom: 20px;
@@ -479,7 +485,7 @@
 }
 
 /* ===============================
-   モーダル
+モーダル
 ================================= */
 .modal {
     display: none;
@@ -545,7 +551,7 @@
 }
 
 /* ===============================
-   認証
+認証
 ================================= */
 .auth-wrapper {
     max-width: 500px;
@@ -623,7 +629,7 @@
 }
 
 /* ===============================
-   マイページ（プロフィール一覧）
+マイページ（プロフィール一覧）
 ================================= */
 .profile-avatar-section {
     display: flex;
@@ -639,11 +645,12 @@
 }
 
 .avatar-wrapper {
-    width: 100px;
-    height: 100px;
-    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     overflow: hidden;
+    border: 1px solid #DDD;
+    background: #F5F5F5;
 }
 
 .avatar-image {
@@ -651,6 +658,11 @@
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.avatar-default {
+    object-fit: contain;
+    background-color: #EEE;
 }
 
 .btn-avatar {
@@ -709,7 +721,7 @@
 }
 
 /* ===============================
-   商品購入画面
+商品購入画面
 ================================= */
 .purchase-container {
     display: flex;
@@ -850,7 +862,7 @@
 }
 
 /* ===============================
-   出品画面
+出品画面
 ================================= */
 .sell-wrapper {
     max-width: 600px;
@@ -946,7 +958,7 @@
 }
 
 /* ===============================
-   カテゴリ選択
+カテゴリ選択
 ================================= */
 .category-display-area {
     margin-bottom: 10px;
@@ -970,4 +982,74 @@
 
 .is-hidden {
     display: none;
+}
+
+/* ===============================
+メール認証誘導
+================================= */
+.verify-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.verify-content {
+    text-align: center;
+    width: 100%;
+}
+
+.verify-message {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    display: inline-block;
+    text-align: center;
+    word-break: keep-all;
+}
+
+.verify-success {
+    color: #38A169;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.verify-action {
+    margin-bottom: 30px;
+}
+
+.btn-verify {
+    display: inline-block;
+    background-color: #DDD;
+    color: #000;
+    padding: 12px 40px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    border: 1px solid #BBB;
+    transition: background-color 0.3s;
+}
+
+.btn-verify:hover {
+    background-color: #CCC;
+}
+
+.resend-form {
+    margin-top: 20px;
+}
+
+.link-resend {
+    background: none;
+    border: none;
+    color: #3182CE;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.link-resend:hover {
+    text-decoration: underline;
 }

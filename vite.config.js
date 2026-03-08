@@ -11,7 +11,6 @@ export default defineConfig({
                     'resources/js/profile.js',
                     'resources/js/purchase.js',
                     'resources/js/sell.js',
-                    'resources/js/show.js',
             ],
             refresh: true,
         }),

@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class ItemsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $items = [
@@ -33,7 +30,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => '西芝',
                 'description' => '高速で信頼性の高いハードディスク',
                 'price' => 5000,
-                'is_sold' => true,
+                'is_sold' => false,
             ],
             [
                 'id' => 3,

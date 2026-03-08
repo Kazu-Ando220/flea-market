@@ -26,6 +26,21 @@ services:
       MYSQL_DATABASE: flea_market
     volumes:
       - mysql_data:/var/lib/mysql
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+  queue-worker:
+    build: ./docker/php
+    volumes:
+      - .:/var/www
+    working_dir: /var/www
+    command: sh -c "sleep 10 && php artisan queue:work"
+    depends_on:
+      - php
+      - mysql
+      - mailhog
 
 volumes:
   mysql_data:

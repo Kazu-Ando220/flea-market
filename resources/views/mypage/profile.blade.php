@@ -10,10 +10,10 @@
 
         <div class="profile-avatar-section">
             <div class="avatar-wrapper">
-                @if(optional($user->profile)->avatar)
+                @if($user->profile?->avatar)
                     <img src="{{ asset('storage/' . $user->profile->avatar) }}" class="avatar-image" alt="プロフィール画像">
                 @else
-                    <img src="{{ asset('images/no_image.png') }}" class="avatar-image" alt="デフォルトプロフィール画像">
+                    <img src="{{ asset('images/no_image.png') }}" class="avatar-image avatar-default" alt="デフォルトプロフィール画像">
                 @endif
             </div>
 
