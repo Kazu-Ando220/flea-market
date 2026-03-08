@@ -12,9 +12,9 @@
     @include('layouts.header')
 
     <div class="page-body">
-        @if (Session::has('success'))
+        @if (session('success') && !Route::is('verification.notice'))
             <div class="success">
-                {{ Session::get('success') }}
+                {{ session('success') }}
             </div>
         @endif
 

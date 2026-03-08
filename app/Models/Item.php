@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PurchaseCompleted;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -118,6 +120,8 @@ class Item extends Model
         ]);
 
         $this->update(['is_sold' => true]);
+
+        Mail::to($user->email)->send(new PurchaseCompleted($this, $user));
     }
 
     public static function createItem(array $data, int $userId)

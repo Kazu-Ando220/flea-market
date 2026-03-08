@@ -6,7 +6,7 @@
             </a>
         </div>
 
-        @unless (Route::is(['login', 'register']))
+        @if (!Route::is('login') && !Route::is('register') && !Route::is('verification.notice'))
             <div class="search-box">
                 <form method="GET" action="{{ route('items.index') }}" class="search-form">
                     <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}" class="search-input">
@@ -33,6 +33,6 @@
                 <li><a href="{{ route('mypage.index') }}" class="nav-link-item">マイページ</a></li>
                 <li><a href="{{ route('items.create') }}" class="btn-sell">出品</a></li>
             </ul>
-        @endunless
+        @endif
     </div>
 </header>

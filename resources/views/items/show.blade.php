@@ -80,7 +80,7 @@
             </div>
 
             {{-- コメント一覧 --}}
-            <div class="comment-section">
+            <div class="comment-section" id="comment-section">
                 <h2>コメント（{{ $item->comments->count() }}）</h2>
 
                 @forelse($item->comments as $comment)

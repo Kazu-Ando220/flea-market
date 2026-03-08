@@ -36,9 +36,9 @@
                             選択してください
                         </option>
 
-                        <option value="コンビニ払い"
-                            {{ $selectedPayment === 'コンビニ払い' ? 'selected' : '' }}>
-                            コンビニ払い
+                        <option value="コンビニ支払い"
+                            {{ $selectedPayment === 'コンビニ支払い' ? 'selected' : '' }}>
+                            コンビニ支払い
                         </option>
 
                         <option value="カード支払い"
@@ -58,10 +58,7 @@
                     <div class="section-header">
                         <h2>配送先</h2>
 
-                        <a
-                            href="{{ route('address.edit', ['item' => $item->id]) }}"
-                            class="link-change"
-                        >
+                        <a href="{{ route('address.edit', ['item' => $item->id]) }}" class="link-change">
                             変更する
                         </a>
                     </div>
@@ -98,10 +95,7 @@
                 </table>
             </aside>
 
-            <button
-                type="submit"
-                form="purchase-form"
-                class="btn-purchase"
+            <button type="submit" form="purchase-form" class="btn-purchase"
                 {{ $item->is_sold ? 'disabled' : '' }}
             >
                 {{ $item->is_sold ? '売り切れ' : '購入する' }}

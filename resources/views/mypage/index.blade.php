@@ -6,9 +6,9 @@
         <div class="profile-left">
             <div class="avatar-wrapper">
                 @if($user->profile?->avatar)
-                    <img src="{{ asset('storage/' . $user->profile->avatar) }}" class="avatar-image">
+                    <img src="{{ asset('storage/' . $user->profile->avatar) }}" class="avatar-image" alt="プロフィール画像">
                 @else
-                    <div class="user-avatar"></div>
+                    <img src="{{ asset('images/no_image.png') }}" class="avatar-image avatar-default" alt="デフォルトプロフィール画像">
                 @endif
             </div>
 

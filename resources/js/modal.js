@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('loginModal');
 
-    if (!modal) {
-        return;
-    }
+    if (!modal) return;
 
     window.showLoginModal = function () {
         modal.style.display = 'block';
@@ -20,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const loginTriggers = document.querySelectorAll('.js-login-trigger');
-
     loginTriggers.forEach(function (trigger) {
         trigger.addEventListener('click', function () {
             showLoginModal();
