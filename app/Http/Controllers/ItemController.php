@@ -3,39 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ExhibitionRequest;
-use App\Models\Category;
-use App\Models\Condition;
 use App\Models\Item;
+use App\Services\ItemService;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
+    public function __construct(private ItemService $itemService) {}
+
     public function index(Request $request)
     {
         $tab = $request->query('tab', 'recommend');
         $keyword = $request->query('keyword');
-        $items = Item::query()
-            ->with(['item_images'])
-            ->tab($tab)
-            ->keyword($keyword)
-            ->get();
+        $items = $this->itemService->getItemsForIndex($tab, $keyword);
 
         return view('items.index', compact('tab', 'keyword', 'items'));
     }
 
     public function create()
     {
-        $categories = Category::all();
-        $conditions = Condition::all();
+        ['categories' => $categories, 'conditions' => $conditions]
+            = $this->itemService->getFormData();
 
         return view('items.create', compact('categories', 'conditions'));
     }
 
     public function store(ExhibitionRequest $request)
     {
-        Item::createItem($request->validated(), Auth::id());
+        $this->itemService->createItem($request->validated(), Auth::id());
 
         return redirect()
             ->route('items.index')
@@ -44,8 +41,8 @@ class ItemController extends Controller
 
     public function show(Item $item)
     {
-        $item->load(['user', 'category', 'condition', 'item_images', 'comments.user', 'likes']);
-        $isLiked = $item->isLikedByCurrentUser();
+        ['item' => $item, 'isLiked' => $isLiked]
+            = $this->itemService->getItemDetail($item);
 
         return view('items.show', compact('item', 'isLiked'));
     }
