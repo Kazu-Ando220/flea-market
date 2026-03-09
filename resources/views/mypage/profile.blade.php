@@ -13,7 +13,7 @@
                 @if($user->profile?->avatar)
                     <img src="{{ asset('storage/' . $user->profile->avatar) }}" class="avatar-image" alt="プロフィール画像">
                 @else
-                    <img src="{{ asset('images/no_image.png') }}" class="avatar-image avatar-default" alt="デフォルトプロフィール画像">
+                    <img src="{{ asset('images/no-image.png') }}" class="avatar-image avatar-default" alt="デフォルトプロフィール画像">
                 @endif
             </div>
 

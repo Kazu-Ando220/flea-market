@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Mail;
 use App\Mail\PurchaseCompleted;
 use App\Models\User;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Item extends Model
 {
@@ -27,20 +28,15 @@ class Item extends Model
         'is_sold' => 'boolean',
     ];
 
-    // リレーション
     public function category() { return $this->belongsTo(Category::class); }
     public function condition() { return $this->belongsTo(Condition::class); }
     public function user() { return $this->belongsTo(User::class); }
-
     public function order() { return $this->hasOne(Order::class); }
-
     public function comments() { return $this->hasMany(Comment::class); }
     public function item_images() { return $this->hasMany(ItemImage::class); }
     public function likes() { return $this->hasMany(Like::class); }
-
     public function likedUsers() { return $this->belongsToMany(User::class, 'likes'); }
 
-    // スコープ
     public function scopeTab($query, $tab)
     {
         if (auth()->check()) {
@@ -81,13 +77,11 @@ class Item extends Model
         }
     }
 
-    // 特定ユーザーのいいね判定
     public function isLikedBy($user_id)
     {
         return $this->likes()->where('user_id', $user_id)->exists();
     }
 
-    // ログインユーザーのいいね判定
     public function isLikedByCurrentUser()
     {
         if (!auth()->check()) {
@@ -110,7 +104,7 @@ class Item extends Model
             abort(403, '配送先が登録されていません。');
         }
 
-        // 注文履歴の作成：購入時点の配送先住所をスナップショットとして保存
+        // 購入時点の配送先住所をスナップショットとして保存
         $this->order()->create([
             'user_id'        => $userId,
             'payment_method' => $data['payment_method'],
