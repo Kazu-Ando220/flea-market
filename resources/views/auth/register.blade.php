@@ -45,7 +45,7 @@
             @enderror
         </div>
 
-        <input type="submit" class="btn-submit" value="登録する">
+        <button type="submit" class="btn-submit">登録する</button>
     </form>
 
     <a href="{{ route('login') }}" class="auth-link">ログインはこちら</a>

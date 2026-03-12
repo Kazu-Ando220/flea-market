@@ -15,7 +15,7 @@
             @endif
 
             <div class="verify-action">
-                <a href="http://mail.google.com/" class="btn-verify" target="_blank" rel="noopener noreferrer">
+                <a href="http://localhost:8025" class="btn-verify" target="_blank" rel="noopener noreferrer">
                     認証はこちらから
                 </a>
             </div>

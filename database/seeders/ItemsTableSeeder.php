@@ -19,7 +19,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => 'Rolax',
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
                 'price' => 15000,
-                'is_sold' => true,
+                'is_sold' => false,
             ],
             [
                 'id' => 2,
@@ -41,7 +41,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => '新鮮な玉ねぎ3束のセット',
                 'price' => 300,
-                'is_sold' => false,
+                'is_sold' => true,
             ],
             [
                 'id' => 4,
@@ -63,7 +63,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => '高性能なノートパソコン',
                 'price' => 45000,
-                'is_sold' => true,
+                'is_sold' => false,
             ],
             [
                 'id' => 6,
@@ -74,7 +74,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => '高音質のレコーディング用マイク',
                 'price' => 8000,
-                'is_sold' => true,
+                'is_sold' => false,
             ],
             [
                 'id' => 7,
@@ -107,7 +107,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => 'Starbacks',
                 'description' => '手動のコーヒーミル',
                 'price' => 4000,
-                'is_sold' => true,
+                'is_sold' => false,
             ],
             [
                 'id' => 10,
