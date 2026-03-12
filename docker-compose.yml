@@ -1,6 +1,7 @@
 services:
   php:
     build: ./docker/php
+    restart: on-failure
     volumes:
       - .:/var/www
     working_dir: /var/www
@@ -9,6 +10,7 @@ services:
 
   nginx:
     image: nginx:latest
+    restart: on-failure
     ports:
       - "80:80"
     volumes:
@@ -19,6 +21,7 @@ services:
 
   mysql:
     image: mysql:8.0
+    restart: on-failure
     ports:
       - "${FORWARD_DB_PORT:-3306}:3306"
     environment:
@@ -26,13 +29,17 @@ services:
       MYSQL_DATABASE: flea_market
     volumes:
       - mysql_data:/var/lib/mysql
+
   mailhog:
     image: mailhog/mailhog
+    restart: on-failure
     ports:
       - "1025:1025"
       - "8025:8025"
+
   queue-worker:
     build: ./docker/php
+    restart: on-failure
     volumes:
       - .:/var/www
     working_dir: /var/www
