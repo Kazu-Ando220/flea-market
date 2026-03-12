@@ -1,12 +1,16 @@
 services:
   php:
     build: ./docker/php
+    restart: on-failure
     volumes:
       - .:/var/www
     working_dir: /var/www
+    entrypoint: >
+      sh -c "chmod -R 777 /var/www/storage && php-fpm"
 
   nginx:
     image: nginx:latest
+    restart: on-failure
     ports:
       - "80:80"
     volumes:
@@ -17,8 +21,33 @@ services:
 
   mysql:
     image: mysql:8.0
+    restart: on-failure
+    ports:
+      - "${FORWARD_DB_PORT:-3306}:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: flea_market
     volumes:
-      - ./docker/mysql:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
+
+  mailhog:
+    image: mailhog/mailhog
+    restart: on-failure
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  queue-worker:
+    build: ./docker/php
+    restart: on-failure
+    volumes:
+      - .:/var/www
+    working_dir: /var/www
+    command: sh -c "sleep 10 && php artisan queue:work"
+    depends_on:
+      - php
+      - mysql
+      - mailhog
+
+volumes:
+  mysql_data:
