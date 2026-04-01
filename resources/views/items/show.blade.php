@@ -104,8 +104,7 @@
                         @auth
                             <form method="POST" action="{{ route('comment.store', $item->id) }}">
                                 @csrf
-                                <textarea name="content" class="@error('content') is-invalid @enderror" rows="5" placeholder="コメントを入力"
-                                    maxlength="255">{{ old('content') }}</textarea>
+                                <textarea name="content" class="@error('content') is-invalid @enderror" rows="5" placeholder="コメントを入力">{{ old('content') }}</textarea>
                                 @error('content')
                                     <p class="error-message">{{ $message }}</p>
                                 @enderror

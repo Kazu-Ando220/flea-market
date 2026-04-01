@@ -319,6 +319,15 @@
     gap: 5px;
 }
 
+.like-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
 .stat-item img,
 .like-button img,
 .guest-icon {
@@ -363,8 +372,6 @@
 .comment-section h2 {
     font-size: 18px;
     font-weight: bold;
-    border-bottom: 1px solid #CCC;
-    padding-bottom: 5px;
     margin-bottom: 15px;
 }
 
