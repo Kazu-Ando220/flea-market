@@ -37,6 +37,16 @@ services:
       - "1025:1025"
       - "8025:8025"
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: on-failure
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+    depends_on:
+      - mysql
+
   queue-worker:
     build: ./docker/php
     restart: on-failure
