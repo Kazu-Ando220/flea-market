@@ -23,16 +23,29 @@ php artisan key:generate
 php artisan migrate
 php artisan db:seed
 php artisan storage:link
+npm install
+npm run build
 exit
 ```
 
 > **補足**: `docker-compose.yml` に queue-worker コンテナが含まれており、起動時に自動でキュー処理が開始されます。購入完了メールはキュー経由で送信されるため、queue-worker が起動していることを確認してください。
+
+### .env 設定について
+.env.example をコピーした時点でメール・DB設定の初期値が入っています。
+Stripe のキーのみ、各自のテストキーを設定してください。
+
+```properties
+# Stripe（各自のテストキーを設定）
+STRIPE_KEY=pk_test_xxxxx
+STRIPE_SECRET=sk_test_xxxxx
+```
 
 ### 開発環境URL
 | 用途 | URL |
 | --- | --- |
 | アプリ | http://localhost/ |
 | MailHog（メール確認） | http://localhost:8025 |
+| phpMyAdmin           | http://localhost:8080 |
 
 
 ## 使用技術（実行環境）
@@ -61,7 +74,7 @@ exit
 ## メール確認環境（MailHog）
 開発環境では MailHog を使用しています。
 - **確認方法**: http://localhost:8025 にアクセスして受信メールを確認してください。
-- **補足**: シーダー作成ユーザー（testuser2）でテストする場合は、画面内の「認証メールを再送する」をクリックすると MailHog にメールが届きます。
+- **補足**: シーダー作成ユーザー（test2@example.com）でテストする場合は、画面内の「認証メールを再送する」をクリックすると MailHog にメールが届きます。
 - **注意**: メール本文内のリンクのホスト部分が正しく解決されない場合は、アドレスバーにて `localhost` に読み替えてアクセスしてください。
 
 
