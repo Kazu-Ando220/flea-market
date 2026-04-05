@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (oldId) {
             const selectedCat = categories.find(c => c.id == oldId);
             if (selectedCat) {
-                // 親子関係を遡って特定する（実務では再帰や階層データを使いますが、ここではシンプルに実装）
+                // 親子関係を遡って特定する
                 const parentId = selectedCat.parent_id;
 
                 if (parentId) {
