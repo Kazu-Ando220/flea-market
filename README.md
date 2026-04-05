@@ -7,9 +7,8 @@
 
 ## 環境構築
 ### Dockerビルド
-
 ```bash
-git clone <リポジトリURL>
+git clone
 cd flea-market
 docker-compose up -d --build
 ```
@@ -34,7 +33,7 @@ exit
 .env.example をコピーした時点でメール・DB設定の初期値が入っています。
 Stripe のキーのみ、各自のテストキーを設定してください。
 
-```properties
+```
 # Stripe（各自のテストキーを設定）
 STRIPE_KEY=pk_test_xxxxx
 STRIPE_SECRET=sk_test_xxxxx
@@ -82,9 +81,40 @@ STRIPE_SECRET=sk_test_xxxxx
 Stripe のコンビニ決済画面への接続を実装しています。
 
 **制限事項**: ローカル開発環境の Webhook 受信設定の兼ね合いにより、コンビニ決済完了後の自動ステータス更新（Ordersテーブルへの保存・自動リダイレクト）は動作しません。
+
 **動作確認手順**:
 1. 「支払い番号発行画面（Stripe決済案内画面）」が表示されることを確認。
 2. クレジットカード決済では「Ordersテーブルへの保存」「MailHogへのメール送信」「商品一覧への自動リダイレクト」の全工程が正常動作することを確認済みです。
+
+
+## PHPUnitテスト
+
+### テスト環境セットアップ
+```bash
+# テスト用DBを作成
+docker exec -it flea-market-mysql-1 bash
+mysql -u root -p
+# パスワード: root
+create database test_database;
+exit
+exit
+
+# テスト用マイグレーション実行
+docker exec -it flea-market-php-1 bash
+php artisan migrate:fresh --env=testing
+exit
+```
+
+> **注意**: `.env.testing` は `.gitignore` により管理対象外です。`.env` をコピーして作成し、`DB_DATABASE=test_database` に変更してください。Stripe のキーも設定してください。
+
+### テスト実行
+```bash
+docker exec -it flea-market-php-1 bash
+./vendor/bin/phpunit
+exit
+```
+### テスト結果
+Tests: 42, Assertions: 102, OK
 
 
 ## テーブル設計のポイント
@@ -97,3 +127,14 @@ Stripe のコンビニ決済画面への接続を実装しています。
 ### カテゴリの複数選択について
 要件ではカテゴリの複数選択が求められていましたが、テーブル数9個以内という制約により中間テーブル（item_categories）を作成できませんでした。
 そのため、items テーブルに category_id を持つ単一選択（プルダウン形式）で実装しています。
+
+
+## 本番環境（Render）
+
+### URL
+https://flea-market-v11e.onrender.com
+
+### 注意事項
+- シーダーは本番環境では自動実行されません。テストは手動でアカウント登録して行ってください。
+- MailHogは本番環境では使用できません。メール認証機能の確認はローカル環境で行ってください。
+- 無料プランのため、一定時間アクセスがないとスリープします。初回アクセス時に50秒程度かかる場合があります。
