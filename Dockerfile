@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     nginx
 
 # PHP拡張機能のインストール
-RUN docker-php-ext-install pdo_mysql mbstring gd
+RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring gd
 
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
