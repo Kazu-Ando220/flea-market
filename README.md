@@ -1,8 +1,19 @@
 # COACHTECHフリマ
 
 ## アプリケーション概要
-フリマアプリのポートフォリオです。
-商品の出品・購入・いいね・コメント・プロフィール編集・メール認証・Stripe決済などの機能を実装しています。
+本アプリはプログラミングスクール（COACHTECH）の模擬案件として作成したフリマアプリのポートフォリオです。
+
+スクールから提示された以下の要件に沿って実装しています。
+- 会員登録・ログイン・ログアウト（Laravel Fortify + メール認証）
+- 商品一覧・マイリスト・商品検索
+- 商品詳細・いいね・コメント
+- 商品購入・支払い方法選択（Stripe決済）・配送先変更
+- プロフィール確認・編集
+- 商品出品・画像アップロード
+
+要件に記載のない機能として、UX向上を目的とした以下を独自に追加実装しています。
+- 未認証ユーザーへのログイン誘導モーダル
+- プロフィール画像選択時のファイル名即時表示
 
 
 ## 環境構築
@@ -30,9 +41,8 @@ exit
 > **補足**: `docker-compose.yml` に queue-worker コンテナが含まれており、起動時に自動でキュー処理が開始されます。購入完了メールはキュー経由で送信されるため、queue-worker が起動していることを確認してください。
 
 ### .env 設定について
-.env.example をコピーした時点でメール・DB設定の初期値が入っています。
+`.env.example` をコピーした時点でメール・DB設定の初期値が入っています。
 Stripe のキーのみ、各自のテストキーを設定してください。
-
 ```
 # Stripe（各自のテストキーを設定）
 STRIPE_KEY=pk_test_xxxxx
@@ -44,7 +54,7 @@ STRIPE_SECRET=sk_test_xxxxx
 | --- | --- |
 | アプリ | http://localhost/ |
 | MailHog（メール確認） | http://localhost:8025 |
-| phpMyAdmin           | http://localhost:8080 |
+| phpMyAdmin | http://localhost:8080 |
 
 
 ## 使用技術（実行環境）
@@ -131,6 +141,7 @@ docker exec -it flea-market-php-1 bash
 ./vendor/bin/phpunit
 exit
 ```
+
 ### テスト結果
 Tests: 42, Assertions: 102, OK
 
